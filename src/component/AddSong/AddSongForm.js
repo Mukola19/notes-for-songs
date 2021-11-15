@@ -1,29 +1,28 @@
-import React, { useState } from "react"
+import React from "react"
 import { Field, Formik } from "formik"
 import { Input, TextArea } from "../Common/FormElement/FormElement"
-const st = {}
+import st from "./AddSongForm.module.css"
+import { Button } from "react-bootstrap"
 
 export const AddSongForm = ({ addSongText }) => {
-  const [isBool, setIsBool] = useState(false)
-  const [names, setNames] = useState('')
 
   const onsubmit = (
     values,
     { setSubmitting, resetForm, setStatus, ...prop }
   ) => {
     addSongText(values)
-    console.log(values)
     setSubmitting(false)
+    resetForm()
   }
 
-
   return (
-    <div>
+    <div className={st.form}>
+      <h2 className={st.title}>Нова пісня</h2>
       <Formik
         initialValues={{
           id: 1,
           name: "",
-          body:``
+          body: ``,
         }}
         onSubmit={onsubmit}
       >
@@ -34,15 +33,16 @@ export const AddSongForm = ({ addSongText }) => {
                 <div className={st.form_error}>{status}</div>
 
                 <Field component={Input} name="name" label="Імя" />
-                <Field component={TextArea} name='body' label="Текст"/>
-
-                <button
+                <Field component={TextArea} name="body" label="Текст" />
+                <Button
                   type="submit"
                   disabled={isSubmitting}
+                  variant="dark"
+                  size="lg"
                   className={st.form_button}
                 >
                   Add
-                </button>
+                </Button>
               </form>
             </div>
           )
@@ -51,35 +51,3 @@ export const AddSongForm = ({ addSongText }) => {
     </div>
   )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

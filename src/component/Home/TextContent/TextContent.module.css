@@ -1,4 +1,17 @@
-.textContent{
-    display: grid;
-text-align: center;
+.textContent {
+  display: grid;
+  /* text-align: center; */
+  margin-left: 60px;
+
+}
+
+.body{
+    margin-bottom: 80px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family:monospace;
+}
+
+.name{
+    margin-top: 20px;
 }

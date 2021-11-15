@@ -8,7 +8,7 @@ export const Input = ({field, form,classSt, ...props}) => {
     <div>
     <h4 className={st.form_label}>{props.label}</h4>
     {form.errors[field.name]&& form.touched[field.name] && <div className={st.form_error} >{form.errors[field.name]}</div>}
-    <input {...field} {...props} />
+    <input {...field} {...props} className={st.form_input} autocomplete='off'/>
   </div>
     )
   }
