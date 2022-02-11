@@ -1,18 +1,22 @@
-import React from "react"
-import st from "./App.module.css"
-import { BrowserRouter, Route } from "react-router-dom"
-import { HomeConteiner } from "./component/Home/HomeConteiner"
-import { NavBarLinkConteiner } from "./component/NavBarLink/NavBarLinkConteiner"
-import  AddSongConteiner  from "./component/AddSong/AddSongConteiner"
+import React, { useContext } from 'react'
+import { BrowserRouter } from 'react-router-dom'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { AppRouter } from './component/AppRouter'
+import { Context } from '.'
+import { Loader } from './component/Common/Loader/Loader'
+import st from './App.module.css'
 
-function App(props) {
+function App() {
+  const { auth } = useContext(Context)
+  const [user, loading, error] = useAuthState(auth)
+
+  if (loading) {
+    return <Loader />
+  }
+
   return (
     <BrowserRouter>
-      <div className={st.body}>
-        <Route path="/home" render={() => <HomeConteiner />} />
-        <Route path="/AddSong" render={() => <AddSongConteiner />} />
-        <Route path="/" render={() => <NavBarLinkConteiner />} />
-      </div>
+      <AppRouter />
     </BrowserRouter>
   )
 }

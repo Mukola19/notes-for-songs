@@ -1,0 +1,18 @@
+.header {
+  background-color: rgb(58, 58, 58);
+  margin: 0px 5px 5px 5px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .button {
+      margin-right: 20px;
+  }
+}
+
+.arrow {
+  padding-left: 20px;
+  padding-right: 10px;
+}
+
+

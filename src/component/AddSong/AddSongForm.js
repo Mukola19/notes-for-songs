@@ -1,53 +1,25 @@
-import React from "react"
-import { Field, Formik } from "formik"
-import { Input, TextArea } from "../Common/FormElement/FormElement"
-import st from "./AddSongForm.module.css"
-import { Button } from "react-bootstrap"
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import { Input, TextArea } from '../Common/FormElement/FormElement'
+import st from './AddSongForm.module.scss'
+import { Button, Form } from 'react-bootstrap'
 
-export const AddSongForm = ({ addSongText }) => {
+export const AddSongForm = ({ setSong }) => {
+  const { register, handleSubmit } = useForm()
 
-  const onsubmit = (
-    values,
-    { setSubmitting, resetForm, setStatus, ...prop }
-  ) => {
-    addSongText(values)
-    setSubmitting(false)
-    resetForm()
-  }
+
 
   return (
-    <div className={st.form}>
-      <h2 className={st.title}>Нова пісня</h2>
-      <Formik
-        initialValues={{
-          id: 1,
-          name: "",
-          body: ``,
-        }}
-        onSubmit={onsubmit}
-      >
-        {({ handleSubmit, isSubmitting, status }) => {
-          return (
-            <div>
-              <form onSubmit={handleSubmit} className={st.form}>
-                <div className={st.form_error}>{status}</div>
+    <Form className={st.form} onChange={handleSubmit(setSong)}>
 
-                <Field component={Input} name="name" label="Імя" />
-                <Field component={TextArea} name="body" label="Текст" />
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  variant="dark"
-                  size="lg"
-                  className={st.form_button}
-                >
-                  Add
-                </Button>
-              </form>
-            </div>
-          )
-        }}
-      </Formik>
-    </div>
+      <Form.Control {...register('name')} placeholder='Назва' />
+      <Form.Control
+        {...register('body')}
+        as='textArea'
+        placeholder='Текст пісні'
+        className={st.body}
+
+      />
+    </Form>
   )
 }
