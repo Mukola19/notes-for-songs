@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form class="form">
+      <!-- <input name="displayName" type="text" /> -->
+      <input name="email" type="text" />
+      <input name="password" type="text" />
+      <button type="submit">Submit</button>
+    </form>
+
+    <script>
+      const form = document.querySelector(".form")
+      // const inputs = document.querySelectorAll('.form input').value
+      const url = "http://localhost:5000/api/user/login"
+
+      form.onsubmit = async (e) => {
+        e.preventDefault()
+
+        const body = {
+          // displayName: form.children[0].value,
+          email: form.children[0].value,
+          password: form.children[1].value,
+        }
+
+        fetch(url, {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            // 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMGJiYWRkZjMzMjk2MTc1YmQyNDg0MiIsImVtYWlsIjoibUBnbWFpbC5jb20iLCJkaXNwbGF5TmFtZSI6Im1pbGxlciIsInBob3RvVXJsIjpudWxsLCJpYXQiOjE2NDQ5Mzg4MDIsImV4cCI6MTY0NDk0MDYwMn0.FQwTbJ0-olkk_tb_QRrgZQP6jjQClFxeaQWoR208umo ',
+          },
+          body: JSON.stringify(body), // body data type must match "Content-Type" header
+        }).then((res) => {
+          console.log(res.data)
+        })
+      }
+    </script>
+  </body>
+</html>

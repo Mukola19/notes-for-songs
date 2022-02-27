@@ -1,0 +1,22 @@
+.header {
+  background-color: rgb(58, 58, 58);
+  margin: 0px 5px 5px 5px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.arrow {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+
+.homeLink {
+  color: black;
+  font-size: 18px;
+  text-decoration: none;
+  margin-left: 10px;
+
+}
