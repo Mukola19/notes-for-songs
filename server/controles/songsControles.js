@@ -3,8 +3,8 @@ const songsService = require("../service/songs-service")
 class SongsControles {
   async create(req, res, next) {
     try {
-      const { name, body  } = req.body
-      const song = await songsService.create(req.user.id, name, body , null)
+      const { name, body, folderId  } = req.body
+      const song = await songsService.create(req.user.id, name, body , folderId)
       res.json(song)
     } catch (e) {
       next(e)
@@ -15,8 +15,8 @@ class SongsControles {
 
   async update(req, res, next) {
     try {
-        const { name, body , categoryId, songId } = req.body
-        const song = await songsService.update(songId, name, body ,categoryId)
+        const { name, body , typeId, songId } = req.body
+        const song = await songsService.update(songId, name, body ,typeId)
         res.json(song)
     } catch (e) {
       next(e)
@@ -36,8 +36,8 @@ class SongsControles {
  
   async getSongs(req, res, next) {
     try {
-        const { categoryId } = req.query
-        const songs = await songsService.getSongs(req.user.id, categoryId)
+        const { typeId } = req.query
+        const songs = await songsService.getSongs(req.user.id, typeId)
         res.json(songs)
     } catch (e) {
       next(e)

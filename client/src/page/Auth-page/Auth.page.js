@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { AuthForm } from '../../component/Auth/AuthForm'
 import { Header } from '../../commons/Header/Header'
-import { login, registration } from '../../store/reducers/userReducer'
+import { login, registration } from '../../store/thunks/userThunk'
 import st from './Auth.page.module.scss'
 
 

@@ -4,14 +4,14 @@ const SongDto = require("../dtos/song-dto")
 const SongsDto = require("../dtos/songs-dto")
 
 class SongsService {
-    // owner = userId
-  async create(owner, name, body, categoryId) {
-    const candidate = await Song.findOne({ owner, name })
+  // owner = userId
+  async create(owner, name, body, folderId) {
+    const candidate = await Song.findOne({ owner, name , folder: folderId })
     if (candidate) {
-      return candidate
+      throw ApiError.errStatus400('Така пісня вже є')
     }
 
-    const song = await Song.create({ owner, name, body })
+    const song = await Song.create({ owner, name, body, folder: folderId })
     const songDto = new SongDto(song)
 
     return songDto
@@ -25,10 +25,15 @@ class SongsService {
     return songDto
   }
 
-  async getSongs(userId, categoryId) {
-    const songs = await Song.find({ owner: userId })
+  async getSongs(userId, folderId) {
+    let songs = []
+    if (folderId) {
+      songs = await Song.find({ owner: userId, folder: folderId })
+    } else {
+      songs = await Song.find({ owner: userId })
+    }
 
-    const songsDto = songs.map(song => new SongsDto(song))
+    const songsDto = songs.map((song) => new SongsDto(song))
 
     return songsDto
   }

@@ -2,10 +2,10 @@ import React  from "react"
 import {  Route, Switch, Redirect } from "react-router-dom"
 import { SongPage } from "../page/Song-page/Song.page"
 import { ListSongsPage } from "../page/ListSongs-page/ListSongs.page"
-import { HomePage } from "../page/Home-page/Home.page"
 import { useAuth } from "../hooks/useAuth"
 import { AuthPage } from "../page/Auth-page/Auth.page"
 import { SongwritingPage } from "../page/Songwriting-page/Songwriting-page"
+import { FoldersPage } from "../page/Folders-page/Folders.page"
 
 export const AppRouter = () => {
 const { isAuth } = useAuth()
@@ -15,10 +15,10 @@ const { isAuth } = useAuth()
   return isAuth ? (
     <Switch>
       <Route path="/songwriting/:songId?" render={() => <SongwritingPage />} />
+      <Route path="/folders" render={() => <FoldersPage />} />
       <Route path="/song/:id?" render={() => <SongPage />} />
       <Route path="/songs" render={() => <ListSongsPage />} />
-      <Route path="/home" render={() => <HomePage />} />
-      <Redirect to={"/home"} />
+      <Redirect to={"/songs"} />
     </Switch>
   ) : (
     <Switch>

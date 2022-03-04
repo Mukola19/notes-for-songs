@@ -3,7 +3,7 @@ const router = Router()
 
 router.use('/user', require('./userRouter'))
 router.use('/songs', require('./songsRouters'))
-// router.use('/categories', require('./categoriesRouter'))
+router.use('/folders', require('./foldersRouter'))
 
 
 

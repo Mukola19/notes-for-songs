@@ -1,0 +1,12 @@
+.toolbar {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  display: flex;
+  //   align-items: center;
+  width: 150px;
+  height: 35px;
+  button {
+    color: rgb(221, 217, 199) !important;
+  }
+}

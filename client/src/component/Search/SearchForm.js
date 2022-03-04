@@ -1,20 +1,30 @@
-import React from "react"
-import { useForm } from "react-hook-form"
-import loupe from "../../img/loupe.png"
-import { AppInput } from "../../commons/Elements/AppInput/AppInput"
-import st from "./Search.module.scss"
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import SearchIcon from '@mui/icons-material/Search'
+import { Search, SearchIconWrapper, StyledInputBase } from '../../commons/AppSearch/AppSearch'
+import st from './Search.module.scss'
 
-export const SearchForm = () => {
+export const SearchForm = ({ onSearch }) => {
   const { register, handleSubmit } = useForm()
 
-  const onsubmit = (data) => {
-    console.log(data)
-  }
+  
 
   return (
-    <form onSubmit={handleSubmit(onsubmit)} className={st.form}>
-      <img src={loupe} width={35} />
-      <AppInput register={register("name")} placeholder="Пошук пісень" />
+
+
+    
+    <form onSubmit={handleSubmit(onSearch)} className={st.form}>
+      <Search>
+        <SearchIconWrapper>
+          <SearchIcon color='textColor'/>
+        </SearchIconWrapper>
+        <StyledInputBase
+        autoComplete='off'
+          placeholder='Пошук пісень...'
+          inputProps={{ 'aria-label': 'search' }}
+          {...register('name')}
+        />
+      </Search>
     </form>
   )
 }

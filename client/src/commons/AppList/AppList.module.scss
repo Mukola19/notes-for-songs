@@ -1,0 +1,39 @@
+$text-color: rgb(221, 217, 199) !important;
+
+.appList {
+  width: 100%;
+  max-width: 700px;
+}
+
+.appListFolder {
+  width: 100%;
+  max-width: 700px;
+  background-color: rgb(58, 58, 58) !important;
+  color: $text-color;
+  width: 700px;
+  height: 50px;
+  margin-top: 10px;
+  border-radius: 2px;
+
+  li {
+    background-color: rgb(105, 0, 0) !important;
+  }
+}
+
+.listItemsFolder {
+  .appListItem {
+    background-color: rgb(59, 59, 59) !important;
+    width: 680px;
+    margin-left: 20px;
+  }
+}
+
+.appListItem {
+  color: $text-color;
+  width: 700px;
+  margin-top: 10px;
+  background-color: rgb(58, 58, 58) !important;
+
+  height: 50px;
+  border-radius: 2px;
+}

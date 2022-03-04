@@ -1,13 +1,25 @@
-.buttons {
-    display: flex;
-    align-items: center;
-    margin-right: 5px;
-    button {
-        margin-right: 30px;
-        font-size: 20px;
-        font-weight: 600;
-    }
+.paper {
+  color: rgb(221, 217, 199) !important;
+  padding: 0;
+  width: 700px;
+  margin: 0px auto;
+  background-color: rgb(58, 58, 58) !important;
 
+  padding-left: 15px;
+  padding-top: 10px;
+  min-height: 450px;
+  margin-top: 80px;
 
+  position: relative;
+}
 
+.spinner {
+  display: flex;
+  justify-self: center;
+}
+
+.panel {
+  display: flex;
+  background-color: red;
+  height: 47px;
 }

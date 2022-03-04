@@ -1,6 +1,7 @@
-import React from "react";
-import cl from "classnames";
-import st from "./AppInput.module.scss";
+import React from "react"
+import TextareaAutosize from '@mui/material/TextareaAutosize'
+import cl from "classnames"
+import st from "./AppInput.module.scss"
 
 export const AppInput = ({
   errors = {},
@@ -10,19 +11,16 @@ export const AppInput = ({
   textArea,
   ...props
 }) => {
-  let error = !!errors[name];
+  let error = !!errors[name]
 
   return (
-    <label htmlFor={name} className={cl(st.inp, { [st.error]: error })}>
+    <div  className={cl(st.inp, { [st.error]: error })}>
       {textArea ? (
-        <textarea {...props} id={name} {...register} placeholder={label}  />
+        <TextareaAutosize aria-label="empty textarea" {...props} id={name} {...register} placeholder={label}  />
       ) : (
-        <input {...props} id={name} {...register} placeholder="&nbsp;" />
+        <input {...props} id={name} {...register} placeholder={label}  autoComplete={'off'}/>
       )}
-      <span className={st.label}>
-        {!error ? label : errors[name]?.message}{" "}
-      </span>
-      <span className={st.focusBg}></span>
-    </label>
-  );
-};
+    </div>
+  )
+}
+

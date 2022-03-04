@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { AddSongForm } from "../../component/AddSong/AddSongForm"
 import { Header } from "../../commons/Header/Header"
 import { AppButton } from "../../commons/Elements/AppButton/AppButton"
 import { useDispatch, useSelector } from "react-redux"
-import {
-  createSong,
-  getOneSong,
-  updateSong,
-} from "../../store/reducers/songsReducer"
+import { createSong, updateSong } from "../../store/thunks/songsThunk"
 import { useHistory, useParams } from "react-router-dom"
 import st from "./Songwriting-page.scss"
+import { AppDropdown } from "../../commons/AppDropdown/AppDropdown"
 
 export const SongwritingPage = () => {
   const [form, setForm] = useState({})
@@ -17,9 +14,6 @@ export const SongwritingPage = () => {
   const dispatch = useDispatch()
   const { push } = useHistory()
   const { songId } = useParams()
-
-
-
 
   const save = () => {
     songId
@@ -30,6 +24,9 @@ export const SongwritingPage = () => {
   return (
     <div>
       <Header>
+        {/* <AppDropdown>
+
+        </AppDropdown> */}
         <AppButton onClick={save}>Зберегти</AppButton>
       </Header>
 

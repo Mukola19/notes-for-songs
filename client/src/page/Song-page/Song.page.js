@@ -1,54 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Button } from "react-bootstrap";
-import { AppDropdown } from "../../commons/AppDropdown/AppDropdown";
-import { Header } from "../../commons/Header/Header";
-import { Song } from "../../component/Song/Song";
-import st from "./Song.page.module.scss";
-import { useHistory, useParams } from "react-router-dom";
-import {
-  deleteSong,
-  getOneSong,
-  updateSong,
-} from "../../store/reducers/songsReducer";
-import { useAuth } from "../../hooks/useAuth";
-import { AppButton } from "../../commons/Elements/AppButton/AppButton";
-import { AppDropdownItem } from "../../commons/AppDropdown/AppDropdownItem";
-import { Election } from "../../component/Song/Election";
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Header } from '../../commons/Header/Header'
+import { useParams } from 'react-router-dom'
+import { getOneSong } from '../../store/thunks/songsThunk'
+import { useAuth } from '../../hooks/useAuth'
+import { Box, CircularProgress, Paper } from '@mui/material'
+import st from './Song.page.module.scss'
+import { SongLetter } from '../../component/SongLetter/SongLetter'
+import { ToolbarContainer } from '../../component/Toolbar/Toolbar.container'
 
 export const SongPage = () => {
-  const [fontSize, setFontSize] = useState(16);
-  const { id } = useParams();
-  const { push } = useHistory();
-  const song = useSelector((state) => state.songs.song);
-  const { loading } = useAuth();
-  const dispatch = useDispatch();
+  const [zoom, setZoom] = useState(16)
+  const { id } = useParams()
+  const song = useSelector((state) => state.songs.song)
+  const { loading } = useAuth()
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getOneSong(id));
-  }, []);
-
+    dispatch(getOneSong(id))
+  }, [])
 
   return (
     <>
-      <Header>
-        <div className={st.buttons}>
-          <AppButton
-            onClick={() => setFontSize(fontSize + 2)}
-          >
-            +
-          </AppButton>
-          <AppButton
-            onClick={() => setFontSize(fontSize - 2)}
-          >
-            -
-          </AppButton>
- 
-          <Election id={id} />
-        </div>
-      </Header>
+      <Header />
+      <Paper elevation={3} className={st.paper}>
+        {loading ? (
+          <CircularProgress color='inherit' className={st.spinner} />
+        ) : (
+          <SongLetter fontSize={zoom} {...song} />
+        )}
 
-      <Song {...song} fontSize={fontSize} loading={loading} />
+        <ToolbarContainer setZoom={setZoom} zoom={zoom} song={song} />
+      </Paper>
     </>
-  );
-};
+  )
+}

@@ -1,0 +1,57 @@
+$color-text: rgb(221, 217, 199) !important;
+$background: rgba(0, 0, 0, 0) !important;
+$size: 10px !important;
+
+.sidebar {
+  position: fixed;
+  z-index: 9999;
+}
+
+.firstMenu {
+  position: fixed;
+  height: 98vw;
+  top: 60px;
+  overflow: hidden;
+}
+
+.listItem {
+  text-decoration: none;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  margin-top: $size;
+  border-bottom-right-radius: $size;
+  border-top-right-radius: $size;
+  transition: width 0.5s;
+
+  &:hover {
+    background-color: #3a3a3a !important;
+  }
+}
+
+.itemText {
+  opacity: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: $color-text;
+}
+
+.listItemActive {
+  background-color: #5a5a5a !important;
+  width: 65px;
+ 
+ 
+
+  &:hover {
+    background-color: #666666 !important;
+  }
+}
+
+.itemOpen {
+  width: 160px;
+
+  .itemText {
+    opacity: 1;
+  }
+}

@@ -1,51 +1,65 @@
-import React, { useRef } from "react"
-import { useState } from "react"
-import cl from "classnames"
-import menuImg from "../../img/icons8-меню-2-96.png"
+import React, { useState } from "react"
+import Button from "@mui/material/Button"
+import Menu from "@mui/material/Menu"
+import MenuItem from "@mui/material/MenuItem"
+import { Divider, Typography } from "@mui/material"
 import st from "./AppDropdown.module.scss"
-import { AppButton } from "../Elements/AppButton/AppButton"
 
-export const AppDropdown = ({  title = null, children }) => {
-  const [active, setActive] = useState(false)
-  const [actiOption, setActiOption] = useState(title)
-
-  const ref = useRef()
-
-
-  const close = (e) => {
-    if (!ref.current || ref.current.contains(e.target)) {
-      return
-    }
-    e.stopPropagation()
-    setActive(false)
+export const AppDropdown = ({ options, onSelect }) => {
+  const [anchorEl, setAnchorEl] = useState(null)
+  const [title, setTitle] = useState("")
+  const open = Boolean(anchorEl)
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleClose = () => {
+    setAnchorEl(null)
   }
 
-  const changeActive = (e) => {
-    e.stopPropagation()
-    setActive(true)
+  const onSelectLocal = item => {
+    setTitle(item.name)
+    handleClose()
+    onSelect(item.id)
   }
 
-  const onclick = (e, { title, func }) => {
-    e.stopPropagation()
-    func()
-    setActiOption(title)
-  }
+ 
 
   return (
-    <div className={cl(st.dropdown, { [st.active]: active })}>
-      <div className={st.background} onClick={close} />
+    <div>
+      <Button
+        sx={{ width: 100 }}
+        onClick={handleClick}
+        color="textColor"
+      >
+        <Typography
+          variant="p"
+          noWrap
+          component="div"
+          sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+        >
+          {title || "Фільтр"}
+        </Typography>
+      </Button>
 
-      <ul className={st.container} ref={ref}>
-        {children}
-      </ul>
 
-      {title && actiOption ? (
-        <AppButton className={st.title} onClick={changeActive}  >
-          {actiOption}
-        </AppButton>
-      ) : (
-        <img src={menuImg} className={st.btnDropdown} onClick={changeActive} />
-      )}
+      <Menu
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        className={st.appDropdownMenu}
+        color="error"
+  
+      >
+           <MenuItem onClick={() => onSelectLocal({id: 0})}>
+            Відмінити
+          </MenuItem>
+          <Divider variant="middle"/>
+        {options.map((item) => (
+          <MenuItem onClick={() => onSelectLocal(item)} key={item.id}>
+            {item.name}
+          </MenuItem>
+        ))}
+      </Menu>
     </div>
   )
 }
