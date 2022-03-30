@@ -1,41 +1,41 @@
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import { AppInput } from '../../commons/Elements/AppInput/AppInput'
-import { IconButton, Paper } from '@mui/material'
-import SaveIcon from '@mui/icons-material/Save';
+import React from "react"
+import { Controller, useForm } from "react-hook-form"
+import { IconButton, InputBase, Paper, TextareaAutosize } from "@mui/material"
+import SaveIcon from "@mui/icons-material/Save"
+import FolderIcon from "@mui/icons-material/Folder"
+import wordLength from "../../utils/wordLength"
+import st from "./AddSongForm.module.scss"
 
-import st from './AddSongForm.module.scss'
-
-export const AddSongForm = ({ setForm, song }) => {
+export const AddSongForm = ({ saveing, song }) => {
   const { register, handleSubmit } = useForm({ defaultValues: song })
 
-    const onsubmit = data => setForm(data)
-
-
-
   return (
-    <Paper elevation={3} className={st.paper}>
+    <Paper className={st.paper}>
+      <form onSubmit={handleSubmit(saveing)} className={st.form}>
+        <input
+          className={st.nameSong}
+          placeholder="Назва"
+          {...register("name")}
+          autoComplete="off"
+        />
 
-    <form  onChange={handleSubmit(onsubmit)}>
-   
-      <AppInput register={register('name')} label='Назва' />
+        <TextareaAutosize
+          className={st.bodySong}
+          placeholder="Текст пісні"
+          {...register("body")}
+        />
 
-      <AppInput
-        register={register('body')}
-        label='Текст пісні'
-        textArea
-        className={st.body}
-      />
-    </form>
- 
+        <div className={st.toolbar}>
+          <div className={st.selectedFolder}>
+            <FolderIcon className={st.folderIcon} color={'color_desabled'} />
+            <p>{wordLength("Без папки")}</p>
+          </div>
 
-
-    <IconButton className={st.saveButton}>
-        <SaveIcon color='textColor'/>
-      </IconButton>
-
-
-
+          <IconButton type={"submit"}>
+            <SaveIcon color="color" />
+          </IconButton>
+        </div>
+      </form>
     </Paper>
   )
 }

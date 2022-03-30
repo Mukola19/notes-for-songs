@@ -1,34 +1,89 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
-import { AuthForm } from '../../component/Auth/AuthForm'
-import { Header } from '../../commons/Header/Header'
-import { login, registration } from '../../store/thunks/userThunk'
+import { useForm } from 'react-hook-form'
+import { useDispatch, useSelector } from 'react-redux'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { login, registration } from '../../store/user/userThunk'
+import { appLoading } from '../../store/app/appSelector'
+import { Paper } from '@mui/material'
+import { AppInput } from '../../commons/Elements/AppInput/AppInput'
+import { AppButton } from '../../commons/Elements/AppButton/AppButton'
+import { Loader } from '../../commons/Loader/Loader'
+import { validAuth } from '../../utils/validation'
 import st from './Auth.page.module.scss'
 
 
-export const AuthPage = ({ handleClose }) => {
+
+
+export const AuthPage = () => {
+  const loading = useSelector(appLoading)
   const [isLogin, setIsLogin] = useState(true)
-  const { push } = useHistory()
   const dispatch = useDispatch()
 
-  const onsubmit = async data => {
-    if (isLogin) {
-     await dispatch(login(data))
-    } else {
-      await dispatch(registration(data))
+  const useform = { resolver: yupResolver(validAuth()) }
+  
+  const { 
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset } = useForm(useform)
 
-    }
-    push('/home')
+
+  const sendForm = data => {
+    isLogin
+    ? dispatch(login(data))
+    : dispatch(registration(data))
   }
+
+
+  const changeIsLogin = () => {
+    setIsLogin(!isLogin)
+    reset()
+  }
+
   return (
-      <div className={st.authPage}>
-        <h2 className={st.title}>{isLogin? 'Вхід' : 'Реєстрація'}</h2>
-        <AuthForm
-          setIsLogin={() => setIsLogin(!isLogin)}
-          onsubmit={onsubmit}
-          isLogin={isLogin}
+  <Paper className={st.authPage}>
+   <h2 className={st.title}>{isLogin? 'Вхід' : 'Реєстрація'}</h2>
+    <form onSubmit={handleSubmit(sendForm)} className={st.authForm}>
+      {isLogin 
+      ? null 
+      : <AppInput
+         name='displayName'
+         placeholder='Enter name'
+         label="І'мя"
+         errors={errors}
+         register={register}
         />
-      </div>
+      }
+
+      <AppInput
+        name='email'
+        placeholder='Enter email'
+        label='Логін'
+        errors={errors}
+        register={register}
+      />
+
+      <AppInput
+        name='password'
+        type='password'
+        errors={errors}
+        placeholder='Enter password'
+        label='Пароль'
+        register={register}
+      />
+
+
+      <AppButton type='submit' className={st.buttonSubmit} >
+        {isLogin ? 'Війти' : 'Заєструватись'}
+      </AppButton>
+
+
+      <p className={st.choice} onClick={changeIsLogin}>
+        {isLogin ? 'Немає акаунта? Заєструватись' : 'Є акаунт? Війти'}
+      </p>
+    </form>
+    <Loader show={loading} className={st.loader}/>
+  </Paper>
+
   )
 }

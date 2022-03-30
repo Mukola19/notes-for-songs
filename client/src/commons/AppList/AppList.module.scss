@@ -1,4 +1,4 @@
-$text-color: rgb(221, 217, 199) !important;
+@import "../../variables.scss";
 
 .appList {
   width: 100%;
@@ -8,32 +8,29 @@ $text-color: rgb(221, 217, 199) !important;
 .appListFolder {
   width: 100%;
   max-width: 700px;
-  background-color: rgb(58, 58, 58) !important;
-  color: $text-color;
+  background-color: $background;
+  color: $color;
   width: 700px;
   height: 50px;
   margin-top: 10px;
-  border-radius: 2px;
-
-  li {
-    background-color: rgb(105, 0, 0) !important;
-  }
+  border-radius: $border_radius;
 }
 
 .listItemsFolder {
   .appListItem {
-    background-color: rgb(59, 59, 59) !important;
+    background-color: $background;
     width: 680px;
     margin-left: 20px;
   }
 }
 
 .appListItem {
-  color: $text-color;
+  color: $color;
   width: 700px;
   margin-top: 10px;
-  background-color: rgb(58, 58, 58) !important;
+  background-color: $background;
 
   height: 50px;
-  border-radius: 2px;
+  border-radius: $border_radius;
+
 }

@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Header } from '../../commons/Header/Header'
 import { useParams } from 'react-router-dom'
-import { getOneSong } from '../../store/thunks/songsThunk'
-import { useAuth } from '../../hooks/useAuth'
-import { Box, CircularProgress, Paper } from '@mui/material'
+import { CircularProgress, Paper } from '@mui/material'
+import { getOneSong } from '../../store/songs/songsThunk'
+import { SongLetter } from '../../component/Song/SongLetter'
+import { getSong } from '../../store/songs/songsSelector'
+import { appLoading } from '../../store/app/appSelector'
+import { Toolbar } from '../../component/Song/Toolbar'
 import st from './Song.page.module.scss'
-import { SongLetter } from '../../component/SongLetter/SongLetter'
-import { ToolbarContainer } from '../../component/Toolbar/Toolbar.container'
+
 
 export const SongPage = () => {
+  const song = useSelector(getSong)
+  const  loading  = useSelector(appLoading)
   const [zoom, setZoom] = useState(16)
   const { id } = useParams()
-  const song = useSelector((state) => state.songs.song)
-  const { loading } = useAuth()
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -21,17 +22,13 @@ export const SongPage = () => {
   }, [])
 
   return (
-    <>
-      <Header />
-      <Paper elevation={3} className={st.paper}>
-        {loading ? (
-          <CircularProgress color='inherit' className={st.spinner} />
-        ) : (
-          <SongLetter fontSize={zoom} {...song} />
-        )}
+      <Paper className={st.paper}>
+        {loading 
+         ? <CircularProgress color='color' className={st.spinner} />
+         : <SongLetter fontSize={zoom} {...song} />
+        }
 
-        <ToolbarContainer setZoom={setZoom} zoom={zoom} song={song} />
+        <Toolbar setZoom={setZoom} zoom={zoom} song={song} />
       </Paper>
-    </>
   )
 }

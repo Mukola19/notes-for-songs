@@ -1,23 +1,23 @@
 import React  from "react"
 import {  Route, Switch, Redirect } from "react-router-dom"
 import { SongPage } from "../page/Song-page/Song.page"
-import { ListSongsPage } from "../page/ListSongs-page/ListSongs.page"
-import { useAuth } from "../hooks/useAuth"
+import { SongsPage } from "../page/Songs-page/Songs.page"
 import { AuthPage } from "../page/Auth-page/Auth.page"
 import { SongwritingPage } from "../page/Songwriting-page/Songwriting-page"
-import { FoldersPage } from "../page/Folders-page/Folders.page"
+import { SettingsPage } from "../page/Settings-page/Settings.page"
+import { useSelector } from "react-redux"
+import { userIsAuth } from "../store/user/userSelector"
 
 export const AppRouter = () => {
-const { isAuth } = useAuth()
+  const isAuth = useSelector(userIsAuth)
 
-  
 
   return isAuth ? (
     <Switch>
       <Route path="/songwriting/:songId?" render={() => <SongwritingPage />} />
-      <Route path="/folders" render={() => <FoldersPage />} />
       <Route path="/song/:id?" render={() => <SongPage />} />
-      <Route path="/songs" render={() => <ListSongsPage />} />
+      <Route path="/songs" render={() => <SongsPage />} />
+      <Route path="/settings" render={() => <SettingsPage />} />
       <Redirect to={"/songs"} />
     </Switch>
   ) : (
@@ -27,3 +27,5 @@ const { isAuth } = useAuth()
     </Switch>
   )
 }
+
+

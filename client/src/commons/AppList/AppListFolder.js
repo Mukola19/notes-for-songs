@@ -31,15 +31,15 @@ export const AppListFolder = ({ name, onRemove, className, children }) => {
         disablePadding
         secondaryAction={
           <IconButton edge="end" aria-label="delete" onClick={onRemove}>
-            <DeleteIcon color="textColor" />
+            <DeleteIcon color="color" />
           </IconButton>
         }
       >
         <ListItemButton onClick={handleClick}>
           <ListItemIcon>
             {  open 
-            ? <FolderOpenIcon color="textColor" />
-            : <FolderIcon color="textColor" />   
+            ? <FolderOpenIcon color="color" />
+            : <FolderIcon color="color" />   
             }
           </ListItemIcon>
 

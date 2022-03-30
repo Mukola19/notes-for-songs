@@ -1,39 +1,44 @@
-$text-color: rgb(221, 217, 199) !important;
-
-.inp {
+@import "../../../variables.scss";
+.field {
   overflow: hidden;
-
-  textarea,
+  // background-color: forestgreen;
+  & textarea,
   input {
     border: none;
-    margin-bottom: 10px;
-    overflow: hidden;
     outline: none;
     border-radius: 0px;
     padding: 7px;
-    color: $text-color;
-    background-color: rgba(126, 35, 35, 0);
+    color: $color;
+    background-color: rgb(15, 12, 12,0);
     font-size: 16px;
-    
 
     &:-webkit-autofill,
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus,
     &:-webkit-autofill:active {
-      background-color: rgba(54, 54, 54, 0);
+      background-color: rgba(204, 0, 255, 0);
       transition: background-color 5000s ease-in-out 0s;
-      color: $text-color;
+      color: $color;
     }
+
+
+
   }
 
-  input {
+  & input::placeholder {
+    color: $placeholder;
+  }
+
+  & textarea::placeholder {
+    color: $placeholder;
+  }
+
+  & input {
     width: 70%;
-
   }
 
-  textarea {
+  & textarea {
     width: 97%;
-
     resize: none;
     border: 0px;
     outline: none;
@@ -43,3 +48,11 @@ $text-color: rgb(221, 217, 199) !important;
   }
 }
 
+
+.error {
+  color: rgb(194, 13, 13);
+  width: 70%;
+  margin: 0px;
+
+
+}

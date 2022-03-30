@@ -1,26 +1,22 @@
 import React from "react"
-import TextareaAutosize from '@mui/material/TextareaAutosize'
+import TextareaAutosize from "@mui/material/TextareaAutosize"
 import cl from "classnames"
 import st from "./AppInput.module.scss"
 
-export const AppInput = ({
-  errors = {},
-  name = "",
-  label = "",
-  register,
-  textArea,
-  ...props
-}) => {
-  let error = !!errors[name]
+export const AppInput = (props) => {
+  const { register = () => {}, name = '', errors = {}, ...field } = props
+
+  let error = false
 
   return (
-    <div  className={cl(st.inp, { [st.error]: error })}>
-      {textArea ? (
-        <TextareaAutosize aria-label="empty textarea" {...props} id={name} {...register} placeholder={label}  />
-      ) : (
-        <input {...props} id={name} {...register} placeholder={label}  autoComplete={'off'}/>
-      )}
+    <div className={cl(st.field, { [st.error]: error })}>
+      {  errors[name]
+       ? <p className={st.error}> {errors[name].message}</p>
+       : null
+      }
+
+        <input {...field} {...register(name)}  />
+      
     </div>
   )
 }
-

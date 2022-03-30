@@ -1,6 +1,14 @@
 
 
-.speedDial button {
-    height: 0px;
-    width: 40px;
+.speedDial  {
+    margin-left: 15px;
+    height: 320px;
+    transform: translateZ(0px);
+    flex-grow: 1;
+}
+
+.below {
+   & button {
+       margin-top: 8px;
+   }
 }

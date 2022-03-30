@@ -1,88 +1,22 @@
+@import '../../../variables.scss';
+
+
 .button {
-  margin-right: 20px;
 
-  align-items: center;
-  appearance: none;
-  background-color: rgb(58, 58, 58);
-  border: 1px solid #868686;
-  box-sizing: border-box;
-  color: #a5a5a5;
-  cursor: pointer;
-  display: inline-flex;
-  font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica,
-    Arial, sans-serif;
-  font-size: 1rem;
-  height: 2.5em;
-  justify-content: center;
-  line-height: 1.5;
-  padding: calc(0.5em - 1px) 0.9em;
-  position: relative;
-  text-align: center;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: top;
-  white-space: nowrap;
-}
+  // background-color: $background;
+  // border: 1px solid $border_color;
+  border-radius: $border_radius;
+  color: $color;
+ 
 
-.button:active {
-  border-color: #4a4a4a;
-  outline: 0;
-}
 
-.button:focus {
-  border-color: #485fc7;
-  outline: 0;
-}
 
-.button:hover {
-  border-color: #b5b5b5;
-}
-
-.button:focus:not(:active) {
-  box-shadow: rgba(72, 95, 199, 0.25) 0 0 0 0.125em;
 }
 
 
 
-.menuButton {
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: transparent;
-  --bs-bg-opacity: 1;
-  box-sizing: border-box;
-  margin: 0;
-  font-family: inherit;
-  text-transform: none;
-  -webkit-appearance: button;
-  padding: 0.25rem 0.75rem;
-  font-size: 1.25rem;
-  line-height: 1;
-  background-color: transparent;
-  border: 1px solid transparent;
-  border-radius: 0.25rem;
-  transition: box-shadow 0.15s ease-in-out;
-  cursor: pointer;
-  color: rgba(0, 0, 0, 0.55);
-  border-color: rgba(0, 0, 0, 0.1);
 
-  span {
-    -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: transparent;
-    --bs-bg-opacity: 1;
-    font-family: inherit;
-    text-transform: none;
-    font-size: 1.25rem;
-    line-height: 1;
-    color: rgba(0, 0, 0, 0.55);
-    box-sizing: border-box;
-    display: inline-block;
-    width: 1.5em;
-    height: 1.5em;
-    vertical-align: middle;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100%;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-  }
-}
+
+
+
+

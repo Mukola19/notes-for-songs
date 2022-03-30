@@ -1,9 +1,12 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
-import { deleteSong } from '../../store/thunks/songsThunk'
-import { AppListItem } from '../../commons/AppList/AppListItem'
+import { useHistory, Link, NavLink } from 'react-router-dom'
+import { deleteSong } from '../../store/songs/songsThunk'
+import AudiotrackIcon from '@mui/icons-material/Audiotrack'
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import st from './ListSongs.module.scss'
+import { IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
+import { DropDuwnMenu } from './DropDuwnMenu'
 
 export const ItemSong = ({ id, name }) => {
   const { push } = useHistory()
@@ -14,11 +17,19 @@ export const ItemSong = ({ id, name }) => {
   }
 
   return (
-    <AppListItem
-      onRemove={remove}
-      onClick={() => push('/song/' + id)}
-      className={st.listItem}
-      name={name}
-    />
+    <ListItem
+    className={st.appListItem}
+    disablePadding
+    secondaryAction={
+    <DropDuwnMenu songId={id}/>
+    }
+  >
+    <ListItemButton onClick={() => push(`/song/${id}`)}>
+      <ListItemIcon>
+        <AudiotrackIcon color='color' />
+      </ListItemIcon>
+      <ListItemText primary={name} />
+    </ListItemButton>
+  </ListItem>
   )
 }

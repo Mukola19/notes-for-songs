@@ -1,36 +1,30 @@
 import React, { useState } from "react"
 import { AddSongForm } from "../../component/AddSong/AddSongForm"
-import { Header } from "../../commons/Header/Header"
-import { AppButton } from "../../commons/Elements/AppButton/AppButton"
 import { useDispatch, useSelector } from "react-redux"
-import { createSong, updateSong } from "../../store/thunks/songsThunk"
+import { createSong, updateSong } from "../../store/songs/songsThunk"
 import { useHistory, useParams } from "react-router-dom"
+import { getSong } from "../../store/songs/songsSelector"
 import st from "./Songwriting-page.scss"
-import { AppDropdown } from "../../commons/AppDropdown/AppDropdown"
+
+
 
 export const SongwritingPage = () => {
-  const [form, setForm] = useState({})
-  const song = useSelector((state) => state.songs.song)
+  const song = useSelector(getSong)
   const dispatch = useDispatch()
   const { push } = useHistory()
   const { songId } = useParams()
 
-  const save = () => {
+  const saveing = (data) => {
+    return console.log(data);
     songId
-      ? dispatch(updateSong({ songId, ...form }, push))
-      : dispatch(createSong(form, push))
+      ? dispatch(updateSong({ songId, ...data }, push))
+      : dispatch(createSong(data, push))
   }
 
   return (
-    <div>
-      <Header>
-        {/* <AppDropdown>
-
-        </AppDropdown> */}
-        <AppButton onClick={save}>Зберегти</AppButton>
-      </Header>
-
-      <AddSongForm setForm={setForm} song={songId ? song : null} />
-    </div>
+      <AddSongForm
+        song={songId ? song : null}
+        saveing={saveing}
+      />
   )
 }

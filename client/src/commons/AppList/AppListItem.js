@@ -28,13 +28,13 @@ export const AppListItem = ({
       disablePadding
       secondaryAction={
         <IconButton edge='end' aria-label='delete' onClick={onRemove}>
-          <DeleteIcon color='textColor' />
+          <DeleteIcon color='color' />
         </IconButton>
       }
     >
       <ListItemButton onClick={onClick}>
         <ListItemIcon>
-          <AudiotrackIcon color='textColor' />
+          <AudiotrackIcon color='color' />
         </ListItemIcon>
         <ListItemText primary={name || children} />
       </ListItemButton>

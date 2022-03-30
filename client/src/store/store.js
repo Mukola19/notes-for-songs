@@ -1,18 +1,25 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit"
-import user from "./reducers/userReducer"
-import songs from "./reducers/songsReducer"
+import user from "./user/userReducer"
+import songs from "./songs/songsReducer"
+import folders from "./folders/foldersReducer"
+import app from "./app/appReducer"
+import errorhandling from "./middlewares/errorhandlingMiddleware"
 
 const reducer = {
     user,
-    songs
+    songs,
+    app,
+    folders
     
 }
 
-const middleware = getDefaultMiddleware({
+const middleware =[ ...getDefaultMiddleware({
   immutableCheck: false,
   serializableCheck: false,
   thunk: true,
-})
+})]
+
+middleware.push(errorhandling)
 
 export const store = configureStore({
   reducer,

@@ -5,8 +5,8 @@ export const validAuth = () => {
     email: yup.string().email(' Ведіть email').required(' Поле обовʼязково'),
     password: yup
       .string()
-      .min(4, ' Ведіть 4 символів')
-      .max(4, ' Ведіть 10 символів')
+      .min(4, ' Замало символів')
+      .max(10, ' Забагато символів')
       .required(' Поле обовʼязково'),
   })
 }

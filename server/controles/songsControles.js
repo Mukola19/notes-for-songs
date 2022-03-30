@@ -4,6 +4,8 @@ class SongsControles {
   async create(req, res, next) {
     try {
       const { name, body, folderId  } = req.body
+    console.log(folderId)
+
       const song = await songsService.create(req.user.id, name, body , folderId)
       res.json(song)
     } catch (e) {
@@ -15,8 +17,8 @@ class SongsControles {
 
   async update(req, res, next) {
     try {
-        const { name, body , typeId, songId } = req.body
-        const song = await songsService.update(songId, name, body ,typeId)
+        const { name, body , folderId, songId } = req.body
+        const song = await songsService.update(songId, name, body , folderId)
         res.json(song)
     } catch (e) {
       next(e)
@@ -36,8 +38,8 @@ class SongsControles {
  
   async getSongs(req, res, next) {
     try {
-        const { typeId } = req.query
-        const songs = await songsService.getSongs(req.user.id, typeId)
+        const { folderId } = req.query
+        const songs = await songsService.getSongs(req.user.id, folderId)
         res.json(songs)
     } catch (e) {
       next(e)

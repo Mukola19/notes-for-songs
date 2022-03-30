@@ -1,28 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Box from '@mui/material/Box'
-import SpeedDial from '@mui/material/SpeedDial'
-import SpeedDialAction from '@mui/material/SpeedDialAction'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
+import { AppButtonIcon } from '../AppButtonIcon/AppButtonIcon'
 import st from './AppSpeedDial.module.scss'
 
-
+// Випадаюча панель інмструментів
 export const AppSpeedDial = ({ actions }) => {
+  const [open, setOpen] = useState(true)
+  
+
+  const handleClick = () => setOpen(!open)
+
   return (
-    <Box sx={{ height: 320, transform: 'translateZ(0px)', flexGrow: 1 , }}>
-      <SpeedDial
-        direction={'down'}
-        ariaLabel='SpeedDial basic example'
-        icon={<MoreVertIcon />}
-        className={st.speedDial}
-      >
-        {actions?.map(action => (
-          <SpeedDialAction
-            key={action.name}
-            icon={action.icon}
-            tooltipTitle={action.name}
-          />
-        ))}
-      </SpeedDial>
+    <Box className={st.speedDial} >
+      <AppButtonIcon onClick={handleClick}>
+        <MoreVertIcon />
+      </AppButtonIcon>
+
+      <div className={st.below}>
+        {open
+          ? actions?.map(({ name, icon }) => (
+              <AppButtonIcon key={name} title={name} placement={'left'}>
+                {icon}
+              </AppButtonIcon>
+            ))
+          : null}
+      </div>
     </Box>
   )
 }

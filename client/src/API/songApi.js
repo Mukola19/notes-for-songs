@@ -1,8 +1,12 @@
 import { $authHost } from '.'
 
 class SongApi {
-  async getSongs() {
-    const res = await $authHost.get('/songs')
+  async getSongs(folderId = null) {
+    const res = await $authHost.get('/songs', {
+      params: {
+        folderId
+      }
+    })
     return res.data
   }
 

@@ -1,16 +1,13 @@
+@import '../../variables.scss';
+
+
+
 .paper {
-  color: rgb(221, 217, 199) !important;
-  padding: 0;
-  width: 700px;
-  margin: 0px auto;
-  background-color: rgb(58, 58, 58) !important;
-
-  padding-left: 15px;
-  padding-top: 10px;
-  min-height: 450px;
-  margin-top: 80px;
-
   position: relative;
+  color: $color;
+  background-color: $background;
+  min-height: 450px;
+  border-radius: $border_radius;
 }
 
 .spinner {
@@ -18,8 +15,4 @@
   justify-self: center;
 }
 
-.panel {
-  display: flex;
-  background-color: red;
-  height: 47px;
-}
+

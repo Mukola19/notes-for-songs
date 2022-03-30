@@ -1,6 +1,8 @@
 import React from "react"
-import st from "./Loader.module.scss"
+import { CircularProgress } from "@mui/material"
 
-export const Loader = () => (
-<div className={st.ldsSpinner}><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-)
+
+export const Loader = ({ show, ...props }) => {
+  if (!show) return null
+  return <CircularProgress color="color" {...props} size={30}/>
+}

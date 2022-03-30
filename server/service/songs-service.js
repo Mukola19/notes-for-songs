@@ -5,7 +5,7 @@ const SongsDto = require("../dtos/songs-dto")
 
 class SongsService {
   // owner = userId
-  async create(owner, name, body, folderId) {
+  async create(owner, name, body, folderId) { 
     const candidate = await Song.findOne({ owner, name , folder: folderId })
     if (candidate) {
       throw ApiError.errStatus400('Така пісня вже є')
@@ -17,8 +17,8 @@ class SongsService {
     return songDto
   }
 
-  async update(songId, name, body, categoryId) {
-    const song = await Song.findByIdAndUpdate(songId, { name, body })
+  async update(songId, name, body, folderId) {
+    const song = await Song.findByIdAndUpdate(songId, { name, body, folder: folderId })
 
     const songDto = new SongDto(song)
 

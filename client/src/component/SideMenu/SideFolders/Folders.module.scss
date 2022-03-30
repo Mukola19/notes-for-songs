@@ -1,0 +1,65 @@
+@import "../../../variables.scss";
+
+.folders {
+  height: 36px;
+  width: 230px !important;
+  margin-left: 5px;
+  padding-left: 8px;
+  margin-top: 10px;
+  border-radius: $border_radius;
+  padding: 0px;
+  cursor: pointer;
+  &:hover {
+    background-color: $background;
+  }
+}
+
+.foldersList {
+  margin-top: 5px;
+}
+
+.foldersItem {
+  margin: 2px;
+  height: 36px;
+  cursor: pointer;
+  color: $color;
+  width: 230px !important;
+
+  margin-left: 5px;
+  border-radius: $border_radius;
+
+
+  &:hover {
+    background-color: $background;
+  }
+}
+
+.activeItem {
+  background-color: $background;
+}
+
+.foldersTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: $color;
+  margin-right: 5px;
+}
+
+
+
+
+
+.addFolderModal {
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  background-color: $main_background;
+  border: $border;
+  border-radius: $border_radius;
+  padding: 20px;
+  box-shadow: 4;
+  color: $color;
+
+}

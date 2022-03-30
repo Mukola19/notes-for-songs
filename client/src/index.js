@@ -1,10 +1,11 @@
 import React, { createContext } from "react"
 import ReactDOM from "react-dom"
-import reportWebVitals from "./reportWebVitals"
 import { Provider } from "react-redux"
+import { QueryParamProvider } from 'use-query-params'
 import { store } from './store/store'
 import App from "./App"
-import "./index.css"
+import "./index.scss"
+import { Route } from "react-router-dom"
 
 
 
@@ -21,7 +22,6 @@ ReactDOM.render(
   document.getElementById("root")
 )
 
-reportWebVitals()
 
 
 

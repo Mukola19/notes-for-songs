@@ -1,0 +1,77 @@
+// @import '../../../variables.scss';
+
+
+
+// .list {
+//   width: 100%;
+//   width: 420px;
+//   overflow-y: auto;
+//   max-height: 300px;
+// }
+
+// .listItem {
+//   color: $color;
+//   max-width: 390px;
+//   margin-top: 10px;
+//   background-color:  $background;
+//   height: 50px;
+//   border-radius: 2px;
+// }
+
+
+
+// // .listItemCreate {
+// //   color: $color;
+// //   max-width: 390px;
+// //   background-color:  $background;
+// //   height: 40px;
+// //   border-radius: 2px;
+// //   cursor: pointer;
+// //   display: flex;
+// //   justify-content: flex-start;
+// //   align-items: center;
+// //   padding-left: 16px;
+
+ 
+// // }
+
+
+
+
+
+
+
+
+.header {
+  height: 40px;
+  padding: 3px;
+  margin-top: -10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  & h4 {
+    margin: 0px;
+    color: $color;
+    font-size: 17px;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

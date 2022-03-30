@@ -1,7 +1,9 @@
-const Folder = require('../models/Folder')
-const Song = require('../models/Song')
-const ApiError = require('../ApiError/ApiError')
-const { getSongs } = require('./songs-service')
+const Folder = require("../models/Folder")
+const Song = require("../models/Song")
+const FolderDto = require("../dtos/folder-Dto")
+const ApiError = require("../ApiError/ApiError")
+const { getSongs } = require("./songs-service")
+const SongsDto = require("../dtos/songs-dto")
 
 class FoldersService {
   async create(owner, name) {
@@ -12,14 +14,22 @@ class FoldersService {
 
     const folder = await Folder.create({ owner, name })
 
-    return folder
+    const folderDto = new FolderDto(folder)
+
+    folderDto.songs = []
+    return folderDto
   }
 
   async update(folderId, name) {
     const folder = await Folder.findById(folderId)
     folder.name = name
     folder.save()
-    return folder
+    const folderDto = new FolderDto(folder)
+    const songs = await getSongs(owner, folderDto.id)
+    const songsDto = new SongsDto(songs)
+
+    folderDto.songs = songsDto
+    return folderDto
   }
 
   async getFolders(owner) {
@@ -27,23 +37,34 @@ class FoldersService {
 
     const newFolders = []
     for (let folder of folders) {
-      const songs = await getSongs(owner, folder._id)
+      // const songs = await getSongs(owner, folder._id)
 
       newFolders.push({
         id: folder._id,
         name: folder.name,
-        owner: folder.owner,
-        songs,
       })
     }
 
     return newFolders
   }
 
+  async getFolder(folderId) {
+    const folder = await Folder.findById(folderId)
+
+    const songs = await getSongs(owner, folder._id)
+
+    const folderDto = new FolderDto(folder)
+    const songsDto = new SongsDto(songs)
+
+    folderDto.songs = songsDto
+
+    return folderDto
+  }
+
   async delete(folderId) {
     await Folder.findByIdAndDelete(folderId)
     await Song.deleteMany({ folder: folderId })
-    return { message: 'Папку видалено' }
+    return { message: "Папку видалено" }
   }
 }
 

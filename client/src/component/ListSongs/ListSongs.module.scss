@@ -1,13 +1,47 @@
-$text-color: rgb(221, 217, 199) !important;
-
-.list {
-  margin: 0px auto;
-  margin-top: 80px;
-}
+@import '../../variables.scss';
 
 
 
 .spinner {
   display: flex;
   justify-self: center;
+}
+
+
+.itemMessage {
+  display: flex;
+  align-items: center;
+  color: $color;
+  width: 700px;
+  margin-top: 10px;
+  background-color: $background;
+
+  height: 50px;
+  border-radius: 2px;
+  p {
+    margin-left: 10px;
+    font-size: 18px;
+  }
+}
+
+.list {
+  margin-top: -22px !important;
+}
+
+
+.appListItem {
+  color: $color;
+  width: 700px;
+  margin-top: 10px;
+  background-color: $background;
+
+  height: 50px;
+  border-radius: $border_radius;
+
+}
+
+
+.dropDuwnMenu {
+  margin-top: 40px;
+  margin-left: -64px;
 }
