@@ -6,7 +6,7 @@ import st from './AppSpeedDial.module.scss'
 
 // Випадаюча панель інмструментів
 export const AppSpeedDial = ({ actions }) => {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
   
 
   const handleClick = () => setOpen(!open)

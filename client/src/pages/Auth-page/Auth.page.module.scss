@@ -1,0 +1,38 @@
+@import "../../variables.scss";
+
+.authPage {
+  position: relative;
+  margin: 0px auto;
+  margin-top: 100px;
+  width: 340px;
+  padding: 8px;
+}
+
+.title {
+  margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+  
+}
+
+// style form
+
+.authForm {
+  margin-left: 5px;
+
+}
+
+.buttonSubmit {
+  margin-top: 10px;
+}
+
+.choice {
+  cursor: pointer;
+}
+
+
+.loader {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}

@@ -25,10 +25,7 @@ class FoldersService {
     folder.name = name
     folder.save()
     const folderDto = new FolderDto(folder)
-    const songs = await getSongs(owner, folderDto.id)
-    const songsDto = new SongsDto(songs)
 
-    folderDto.songs = songsDto
     return folderDto
   }
 

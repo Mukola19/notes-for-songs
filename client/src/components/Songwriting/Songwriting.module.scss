@@ -1,0 +1,71 @@
+@import "../../variables.scss";
+
+.paper {
+  position: relative;
+  margin: 0px auto;
+  min-height: 450px;
+}
+.form {
+  padding: 15px 0px 15px 15px;
+}
+
+.nameSong {
+  padding-left: 2px;
+  width: 70%;
+  font-size: 16px;
+  font-weight: 600 !important;
+  border: 0px;
+  outline: none;
+
+}
+
+.bodySong {
+  font-size: 16px;
+  font-weight: 500 !important;
+  width: 90%;
+  resize: none;
+  border: 0px;
+  outline: none;
+  min-height: 400px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+}
+
+.saveButton {
+  position: absolute !important;
+  right: 15px !important;
+  top: 10px !important;
+}
+
+.toolbar {
+  position: absolute !important;
+  right: 15px !important;
+  top: 10px !important;
+  width: 180px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.folderIcon {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.selectedFolder {
+  // background-color: rgb(12, 27, 27);
+  color: $color_disabled;
+  width: 130px;
+  height: 30px;
+  padding-left: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  & p{
+    width: 100px;
+  }
+
+}

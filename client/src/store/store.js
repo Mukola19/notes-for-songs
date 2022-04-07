@@ -3,7 +3,6 @@ import user from "./user/userReducer"
 import songs from "./songs/songsReducer"
 import folders from "./folders/foldersReducer"
 import app from "./app/appReducer"
-import errorhandling from "./middlewares/errorhandlingMiddleware"
 
 const reducer = {
     user,
@@ -19,7 +18,6 @@ const middleware =[ ...getDefaultMiddleware({
   thunk: true,
 })]
 
-middleware.push(errorhandling)
 
 export const store = configureStore({
   reducer,

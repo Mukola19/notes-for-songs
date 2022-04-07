@@ -32,7 +32,6 @@ class UserService {
 
 
   async login(email, password) {
-    console.log(email, password);
     const candidate = await User.findOne({ email })
     if (!candidate) {
       throw ApiError.errStatus401()

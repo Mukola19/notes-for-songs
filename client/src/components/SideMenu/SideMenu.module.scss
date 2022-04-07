@@ -1,0 +1,15 @@
+@import "../../variables.scss";
+
+.sidebar {
+  position: fixed !important;
+  width: 220px;
+  top: 60px;
+  border-right: 1px solid rgba(69, 68, 70, 0.178);
+  height: 100vh;
+}
+
+.listItem {
+  height: 36.02px !important;
+  cursor: pointer;
+}
+

@@ -26,13 +26,11 @@ $authHost.interceptors.response.use(
       originalRequest._isRetry = true
 
       try {
-        const res = await axios.get(`${ process.env.REACT_APP_API_URL}/api/user/refresh`, { withCredentials: true })
-       localStorage.setItem('accessToken',res.data.tokens.accessToken )
-
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/user/refresh`, { withCredentials: true })
+        localStorage.setItem('accessToken',res.data.tokens.accessToken )
         return $authHost.request(originalRequest)
       } catch (e) {
-        return $authHost.request({ message: 'Не Aвторизований'})
-        // return { message: "Не авторизований" }
+        // return $authHost.request({ message: 'Не Aвторизований'})
       }
     }
     throw error

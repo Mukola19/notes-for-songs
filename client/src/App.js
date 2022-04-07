@@ -1,69 +1,52 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
-import { AppRouter } from './component/AppRouter'
-import { createTheme } from '@mui/material/styles'
-import { ThemeProvider } from '@emotion/react'
-import { initialize } from './store/user/userThunk'
-import { Header } from './component/Header/Header'
-import { SideMenu } from './component/SideMenu/SideMenu'
-import './index.scss'
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { BrowserRouter } from "react-router-dom"
+import { AppRouter } from "./components/AppRouter"
+import { createTheme } from "@mui/material/styles"
+import { ThemeProvider } from "@emotion/react"
+import { Header } from "./components/Header/Header"
+import { SideMenu } from "./components/SideMenu/SideMenu"
+import "./index.scss"
+import { Container, CssBaseline, Grid } from "@mui/material"
+import { getInitiated, getMode } from "./store/app/appSelector"
+import { initialize, requireMode } from "./store/app/appReducer"
+import { AddSongLink } from "./components/Songwriting/AddSongLink"
 
 function App() {
   const dispatch = useDispatch()
+  const mode = useSelector(getMode)
+  const initiated = useSelector(getInitiated)
 
+  
 
   useEffect(() => {
+    dispatch(requireMode())
     dispatch(initialize())
   }, [])
-
   const theme = createTheme({
     palette: {
-    // mode: 'dark',
-
-   
-      color: {
-        // main: 'rgb(216, 179, 16)',
-        main: 'rgb(221, 217, 199)',
-      },
-      color_desabled: {
-        main: 'rgb(179, 176, 162) '
-      },
-
-      background: {
-        // main: 'rgb(150, 0, 0)',
-        main: 'rgb(58, 58, 58)',
-      },
-      transparent: {
-        main: 'rgba(233, 204, 204, 0)',
-      },
-      primary: {
-        // main: 'rgb(150, 0, 0)',
-       main: 'rgb(58, 58, 58)',
-
-      },
-
-     
-   
-     
+      mode
     },
-
-
-
-    status: {
-      danger: 'rgb(204, 0, 255)',
+    shape: {
+      borderRadius: 1,
     },
   })
+
+if(!initiated) return null
+
+
+
 
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-
+        <CssBaseline />
         <Header />
-        <SideMenu/>
-        <div className='app_router'>
+        <SideMenu />
+        <Container maxWidth={"md"} className={"app_router"}>
           <AppRouter />
-        </div>
+        </Container>
+       <AddSongLink/>
       </ThemeProvider>
     </BrowserRouter>
   )

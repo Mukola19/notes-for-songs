@@ -2,12 +2,6 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: $main_background;
 }
 
 /* Works on Firefox */
@@ -38,16 +32,14 @@ code {
 }
 
 .app_router {
-  position: absolute;
-  left: 328px;
-  width: 700px;
-  top: 80px;
+  width: 700px !important;
+  margin-top: 80px;
 }
 
 //style for drop-duwn-menu
 
-.MuiMenu-paper {
-  background-color: $background;
-  border-radius: $border_radius;
-  color: $color;
-}
+// .MuiMenu-paper {
+//   background-color: $background;
+//   border-radius: $border_radius;
+//   color: $color;
+// }

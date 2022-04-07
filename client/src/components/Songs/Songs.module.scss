@@ -1,0 +1,24 @@
+@import "../../variables.scss";
+
+.spinner {
+  display: flex;
+  justify-self: center;
+}
+
+.itemMessage {
+  display: flex;
+  align-items: center;
+  width: 700px;
+  margin-top: 10px;
+  height: 50px;
+  border-radius: 2px;
+  p {
+    margin-left: 10px;
+    font-size: 18px;
+  }
+}
+
+.dropDuwnMenu {
+  margin-top: 40px;
+  margin-left: -64px;
+}

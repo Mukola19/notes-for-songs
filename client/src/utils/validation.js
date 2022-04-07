@@ -2,6 +2,7 @@ import * as yup from 'yup'
 
 export const validAuth = () => {
   return yup.object().shape({
+    // displayName: yup.string().required(' Поле обовʼязково'),
     email: yup.string().email(' Ведіть email').required(' Поле обовʼязково'),
     password: yup
       .string()

@@ -16,8 +16,14 @@ const foldersReducer = createSlice({
     },
 
     setFolder: (state, { payload }) => {
-      state.array.push(payload)
       state.newFolder = payload
+      state.array.forEach( i => {
+        if(i.id === payload.id) {
+          i.name = payload.name
+           return
+        } 
+      })
+      state.array.unshift(payload)
     },
   },
 })
