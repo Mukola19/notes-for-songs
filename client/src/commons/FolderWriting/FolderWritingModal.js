@@ -25,7 +25,7 @@ export const FolderWritingModal = ({ open, onHide , folderId }) => {
   
   return (
  
-      <Dialog open={open} onClose={onHide} fullWidth >
+      <Dialog open={open} onClose={onHide} fullWidth  >
           <form onSubmit={handleSubmit(saveFolder)}>
         <DialogTitle>Ведіть назву папки</DialogTitle>
         <DialogContent>

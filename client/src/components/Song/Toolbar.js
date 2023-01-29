@@ -1,39 +1,41 @@
-import * as React from 'react'
-import { useDispatch } from "react-redux"
-import { useHistory } from "react-router-dom"
-import { deleteSong } from "../../store/songs/songsThunk"
-import Box from '@mui/material/Box'
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
-import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined'
-import { AppSpeedDial } from '../../commons/AppSpeedDial/AppSpeedDial'
-import { AppZoom } from '../../commons/AppZoom/AppZoom'
-import { AppCopy } from '../../commons/AppCopy/AppCopy'
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import { MenuItem, Box,IconButton } from '@mui/material'
+import ZoomInOutlinedIcon from "@mui/icons-material/ZoomInOutlined"
+import ZoomOutOutlinedIcon from "@mui/icons-material/ZoomOutOutlined"
+import { AppMenu } from '../../commons/AppMenu/AppMenu'
+import { deleteSong } from '../../store/songs/songsThunk'
+import { useCopyToClipboard } from '../../hooks/useCopyToClipboard'
 import st from './Song.module.scss'
 
 
-export const Toolbar = ({  song, ...props }) => {
-
+export const Toolbar = ({ song, zoom, setZoom}) => {
   const dispatch = useDispatch()
   const { push } = useHistory()
+  const [copiedText, copy] = useCopyToClipboard()
 
+
+  const copyHandler = () =>  copy(song.name + '\n \n' + song.body)
+  const updatePush = () => push('/songwriting/' + song.id)
   const removeSong = () => dispatch(deleteSong(song.id, push))
 
 
-  const updatePush = () => push('/songwriting/' + song.id )
-
-
-  const actions = [
-    { icon: <AppCopy text={song.name + '\n \n'+ song.body} />, name: 'Copy' },
-    { icon: <BorderColorOutlinedIcon onClick={updatePush}/>, name: 'Write' },
-    { icon: <DeleteOutlinedIcon onClick={removeSong} />, name: 'Delete' },
-  ]
-
   return (
     <Box className={st.toolbar}>
-      <AppZoom {...props} />
-      <AppSpeedDial actions={actions} />
+      
+      <IconButton onClick={() => setZoom(zoom + 2)}>
+        <ZoomInOutlinedIcon />
+      </IconButton>
+      <IconButton onClick={() => setZoom(zoom - 2)}>
+        <ZoomOutOutlinedIcon />
+      </IconButton>
+
+      <AppMenu>
+        <MenuItem onClick={copyHandler}>Копіювати</MenuItem>
+        <MenuItem onClick={updatePush}>Редагувати</MenuItem>
+        <MenuItem onClick={removeSong}>Видалити</MenuItem>
+      </AppMenu>
     </Box>
   )
 }
-
-

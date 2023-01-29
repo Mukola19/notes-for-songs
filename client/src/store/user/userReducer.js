@@ -4,7 +4,7 @@ const initialState = {
   id: null,
   email: null,
   displayName: null,
-  photoURL: null,
+  photoUrl: null,
   token: null,
   isAuth: false
 }
@@ -17,16 +17,18 @@ const userReducer = createSlice({
       state.email = payload.email
       state.displayName = payload.displayName
       state.token = payload.accessToken
-      state.photoURL = payload.photoURL
+      state.photoUrl = payload.photoUrl
       state.isAuth = true
     },
     removeUser: (state) => {
       state.email = null
       state.displayName = null
       state.token = null
-      state.photoURL = null
+      state.photoUrl = null
       state.isAuth = false
-
+    },
+    changePhotoUrl: (state, { payload }) => {
+      state.photoUrl = payload
     }
   }
 })
@@ -36,7 +38,7 @@ const { actions, reducer } = userReducer
 export const {
   productReleaseUpdatingError,
   setUser,
-  removeUser,
+  removeUser,changePhotoUrl
 } = actions
 
 export default reducer

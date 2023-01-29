@@ -7,10 +7,10 @@ import { getFolders } from '../folders/foldersThunk'
 
 
 
-export const requestSongs = (folderId) => async dispatch => {
+export const requestSongs = (folderId, term) => async dispatch => {
   try {
     dispatch(changeLoading(true))
-    const songs = await songApi.getSongs(folderId)
+    const songs = await songApi.getSongs(folderId, term)
     dispatch(setSongs(songs))
   } catch (e) {
     dispatch(addError(e))

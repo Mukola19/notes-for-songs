@@ -9,13 +9,13 @@ module.exports = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1]
     if (!token) {
-      return next(ApiError.errStatus401())
+      return next(ApiError.unauthorized())
     }
 
 
     const decoded = tokenService.validateAccessToken(token)
     if (!decoded) {
-      next(ApiError.errStatus401())
+      next(ApiError.unauthorized())
     }
 
 
@@ -24,6 +24,6 @@ module.exports = (req, res, next) => {
     req.user = decoded
     next()
   } catch (e) {
-    next(ApiError.errStatus401())
+    next(ApiError.unauthorized())
   }
 }

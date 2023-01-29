@@ -2,10 +2,10 @@ import React from "react"
 import { Avatar } from "@mui/material"
 
 
-export const AppAvatar = ({ photoURL, displayName }) => {
+export const AppAvatar = ({ photoUrl, displayName }) => {
   return (
-    <>{ photoURL 
-    ? <Avatar src={photoURL} />  
+    <>{ photoUrl 
+    ? <Avatar src={photoUrl} />  
     : <Avatar>{displayName[0].toLocaleUpperCase()} </Avatar> }
     </>
   )

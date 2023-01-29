@@ -1,58 +1,112 @@
-import React from "react"
-import { Controller, useForm } from "react-hook-form"
-import { IconButton, InputBase, Paper, TextareaAutosize } from "@mui/material"
-import SaveIcon from "@mui/icons-material/Save"
-import FolderIcon from "@mui/icons-material/Folder"
-import wordLength from "../../utils/wordLength"
-import st from "./Songwriting.module.scss"
+import React, { Component, useState, useEffect } from "react"
+import ReactDOM from "react-dom"
+import { convertToRaw, EditorState, convertFromRaw } from "draft-js"
+import draftToHtmlPuri from "draftjs-to-html"
+import { convertToHTML } from "draft-convert"
+import { stateToHTML } from "draft-js-export-html"
+import { Editor } from "react-draft-wysiwyg"
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
+import { SelectFolderDialog } from "./SelectFolderDialog"
+import { ToolbarForSave } from "./ToolbarForSave"
+import { useForm } from "react-hook-form"
+import { InputBase, Paper, TextareaAutosize } from "@mui/material"
 import { styled } from "@mui/system"
 
+import st from "./Songwriting.module.scss"
+
+// Написання слів до пісні і вибирання папки, і редагування
+
+export const Songwriting = ({ song, saveing }) => {
+  const [showSelect, setShowSelect] = useState(false)
+  const [selectedFolder, setSelectedFolder] = useState({})
+
+  // Зберігання пісні
+  const saveingHandler = (data) => {
+    saveing({ folderId: selectedFolder.id, ...data })
+  }
 
 
-const MyTextareaAutosize = styled(TextareaAutosize)(({ theme }) => ({
-  color: theme.palette.text.primary,
-  backgroundColor: 'rgb(47, 83, 114, 0)',
-}))
 
 
+  // const [editorState, setEditorState] = useState(() =>
+  //   EditorState.createWithContent(convertFromRaw(content))
+  // )
 
+  const [editorState, setEditorState] = useState(EditorState.createEmpty())
 
+  // useEffect(() => {
+  //   console.log(convertToRaw(editorState.getCurrentContent()))
+  // }, [editorState])
 
+  const onEditorStateChange = (editorState) => {
+    setEditorState(editorState)
+  }
 
-
-
-
-
-export const Songwriting = ({ saveing, song }) => {
-  const { register, handleSubmit } = useForm({ defaultValues: song })
+  const htmlPuri = draftToHtmlPuri(
+    convertToRaw(editorState.getCurrentContent())
+  )
 
   return (
-    <Paper className={st.paper}>
-      <form onSubmit={handleSubmit(saveing)} className={st.form}>
-        <InputBase
+    <>
+      <Paper className={st.propertiesSongs}>
+        {/* <InputBase
+          required
           className={st.nameSong}
-          placeholder="Назва"
-          {...register("name")}
-          autoComplete="off"
+          placeholder='Назва пісні'
+          // {...register('name')}  
+          autoComplete='off'
+        /> */}
+
+        <ToolbarForSave
+          nameFolder={selectedFolder.name}
+          showElection={() => setShowSelect(true)}
         />
+      </Paper>
 
-        <MyTextareaAutosize
-          className={st.bodySong}
-          placeholder="Текст пісні"
-          {...register("body")}
+      <Paper className={st.paper}>
+        <Editor
+          editorState={editorState}
+          onEditorStateChange={onEditorStateChange}
+          wrapperClassName={st.wrapper}
+          editorClassName={st.editor}
+          toolbar={{
+            options: [
+              "inline",
+              "fontSize",
+              "fontFamily",
+              "textAlign",
+              "colorPicker",
+              "link",
+              "remove",
+              "history",
+            ],
+            inline: {
+              inDropdown: false,
+              options: ["bold", "italic", "underline"],
+            },
+          }}
         />
+      </Paper>
 
-        <div className={st.toolbar}>
-          <div className={st.selectedFolder}>
-            <FolderIcon className={st.folderIcon} color={'color_desabled'} />
-            <p>{wordLength("Без папки")}</p>
-          </div>
+      <SelectFolderDialog
+        open={showSelect}
+        onClose={() => setShowSelect(false)}
+        selectAFolder={setSelectedFolder}
+      />
 
-          <IconButton type={"submit"}>
-            <SaveIcon color="color" />
-          </IconButton>
-        </div>
-      </form>
-    </Paper>
+      <div>
+        <p>puri</p>
+        <textarea
+          disabled
+          value={htmlPuri}
+        />
+        <div
+          dangerouslySetInnerHTML={{
+            __html: htmlPuri,
+          }}
+        />
+      </div>
+    </>
   )
 }
+

@@ -1,5 +1,13 @@
 @import "../../variables.scss";
 
+// Style for SongLetter
+
+.songLetter {
+  width: 520px;
+  padding: 15px 0px 15px 15px;
+}
+
+
 .name {
   margin: 0px auto;
   width: 600px;
@@ -14,18 +22,13 @@
   font-weight: 500;
 }
 
-//style toolbar
+//style Toolbar
 
 .toolbar {
   position: absolute;
-  right: 15px;
+  right: 20px;
   top: 10px;
   display: flex;
-  width: 160px;
-  height: 35px;
-}
-
-.songLetter {
-  width: 520px;
-  padding: 15px 0px 15px 15px;
+  justify-content: space-between;
+  width: 130px;
 }

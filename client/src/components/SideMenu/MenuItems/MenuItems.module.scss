@@ -37,3 +37,10 @@
   padding: 20px;
   box-shadow: 4;
 }
+
+.active {
+  & span {
+    font-weight: 800 !important;
+    padding-left: 2px;
+  }
+}

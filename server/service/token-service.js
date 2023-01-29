@@ -4,7 +4,7 @@ const Token = require('../models/Token')
 class TokenService {
   generateTokens({isActivation, ...payload}) {
     const accessToken = sign(payload, process.env.SECRET_ACCESS_JWT, {
-      expiresIn: '1h',
+      expiresIn: '30d',
     })
     const refreshToken = sign(payload, process.env.SECRET_REFRESH_JWT, {
       expiresIn: '30d',
@@ -16,14 +16,14 @@ class TokenService {
   }
 
   async saveToken(userId, refreshToken) {
-    const tokenData = await Token.findOne({ user: userId })
+    const tokenData = await Token.findOne({  userId })
 
     if (tokenData) {
       tokenData.refreshToken = refreshToken
       return tokenData.save()
     }
 
-    const token = await Token.create({ user:userId, refreshToken })
+    const token = await Token.create({ userId, refreshToken })
     return token
   }
 

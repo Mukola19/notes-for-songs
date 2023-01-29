@@ -3,15 +3,18 @@ module.exports = class UserDto {
   email
   displayName
   photoUrl
-
+  isActivated
+  
   constructor(model) {
     this.id = model._id
     this.email = model.email
     this.displayName = model.displayName
-    if(model.photoName) {
-    this.photoUrl = model.photoName + process.env.SERVER_URL
-    }
-    this.photoUrl = null
+
+    model.photoName
+    ? this.photoUrl = process.env.SERVER_URL + model.photoName
+    : this.photoUrl = ''
+    this.isActivated = model.isActivated
+  
   }
 }
 

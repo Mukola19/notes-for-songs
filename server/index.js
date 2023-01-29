@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const path = require('path')
 const cookieParser = require('cookie-parser')
+const fileupload = require('express-fileupload')
 
 const app = express()
 
@@ -18,6 +19,7 @@ const corsOptions = {
 
 app.use(express.json()) 
 app.use(cookieParser())
+app.use(fileupload())
 app.use(cors(corsOptions))
 
 app.use('/api', require('./routers/index'))

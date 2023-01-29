@@ -1,30 +1,31 @@
-import React from "react"
-import { NavLink, useHistory, useLocation } from "react-router-dom"
-import cl from "classnames"
-import ListItemIcon from "@mui/material/ListItemIcon"
-import LibraryMusicIcon from "@mui/icons-material/LibraryMusic"
-import InboxIcon from "@mui/icons-material/Inbox"
-import st from "./MenuItems.module.scss"
+import React from 'react'
+import { StringParam, useQueryParam } from 'use-query-params'
+import { useAppQueryParam } from '../../../hooks/useAppQueryParams'
+import cl from 'classnames'
+import LibraryMusicIcon from '@mui/icons-material/LibraryMusic'
 import {
   ListItem,
   ListItemButton,
   ListItemText,
-} from "@mui/material"
+  ListItemIcon
+} from '@mui/material'
+import st from './MenuItems.module.scss'
+
 
 export const SongsItem = () => {
-  const { push } = useHistory()
-  const { pathname } = useLocation()
+  const [folderId, setFolderId] = useAppQueryParam('folderId', StringParam, '/songs')
 
   return (
     <ListItem
-      onClick={() => push("/songs")}
-      className={cl(st.songsItem, { [st.activeItem]: pathname === "/songs" })}
+      onClick={() => setFolderId(undefined)}
+      className={st.songsItem}
     >
       <ListItemButton role={undefined} dense>
         <ListItemIcon>
-          <LibraryMusicIcon fontSize="small" />
+          <LibraryMusicIcon fontSize='small' />
         </ListItemIcon>
-        <ListItemText primary="Всі пісні" />
+        
+        <ListItemText primary='Всі пісні' className={cl( { [st.active]: !folderId })} />
       </ListItemButton>
     </ListItem>
   )

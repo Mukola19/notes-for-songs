@@ -2,7 +2,7 @@ import { folderApi } from '../../API/folderApi'
 import { changeLoading } from '../app/appReducer'
 import { setFolder, setFolders } from './foldersReducer'
 
-export const getFolders = () => async dispatch => {
+export const getFolders = () => async (dispatch) => {
   try {
     dispatch(changeLoading(true))
     const folders = await folderApi.getFolders()
@@ -13,7 +13,7 @@ export const getFolders = () => async dispatch => {
   dispatch(changeLoading(false))
 }
 
-export const createFolder = form => async dispatch => {
+export const createFolder = (form) => async (dispatch) => {
   //form = { name }
   try {
     dispatch(changeLoading(true))
@@ -21,11 +21,11 @@ export const createFolder = form => async dispatch => {
     dispatch(setFolder(folder))
   } catch (e) {
     console.error(e)
-    dispatch(changeLoading(false))
   }
+  dispatch(changeLoading(false))
 }
 
-export const updateFolder = form => async dispatch => {
+export const updateFolder = (form) => async (dispatch) => {
   //form = { name, folderId }
 
   try {
@@ -39,12 +39,13 @@ export const updateFolder = form => async dispatch => {
   dispatch(changeLoading(false))
 }
 
-export const deleteFolder = folderId => async dispatch => {
+export const deleteFolder = (folderId) => async (dispatch) => {
   try {
+    dispatch(changeLoading(true))
     const data = await folderApi.delete(folderId)
     dispatch(getFolders())
   } catch (e) {
     console.error(e)
   }
+  dispatch(changeLoading(false))
 }
-

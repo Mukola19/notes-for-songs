@@ -3,8 +3,9 @@ const { Schema, model, Types } = require('mongoose')
 const schema = new Schema({
   name: { type: String, required: true },
   body: { type: String, required: true },
-  folder: { type: Types.ObjectId, ref: 'Folder' },
-  owner: { type: Types.ObjectId, ref: 'User' },
+  description: { type: String, default: '' },
+  folderId: { type: Types.ObjectId, ref: 'Folder' },
+  userId: { type: Types.ObjectId, ref: 'User' },
 
 })
 

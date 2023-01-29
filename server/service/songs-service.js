@@ -1,36 +1,60 @@
-const Song = require("../models/Song")
-const ApiError = require("../ApiError/ApiError")
-const SongDto = require("../dtos/song-dto")
-const SongsDto = require("../dtos/songs-dto")
+const Song = require('../models/Song')
+const ApiError = require('../ApiError/ApiError')
+const SongDto = require('../dtos/song-dto')
+const SongsDto = require('../dtos/songs-dto')
 
 class SongsService {
-  // owner = userId
-  async create(owner, name, body, folderId) { 
-    const candidate = await Song.findOne({ owner, name , folder: folderId })
-    if (candidate) {
-      throw ApiError.errStatus400('Така пісня вже є')
-    }
+  async create(userId, name, body, description, folderId) {
+    const candidate = await Song.findOne({ userId, name, folderId })
 
-    const song = await Song.create({ owner, name, body, folder: folderId })
+    if (candidate) throw ApiError.badRequest('Така пісня вже є')
+
+    const song = await Song.create({
+      userId,
+      name,
+      body,
+      description,
+      folderId
+    })
     const songDto = new SongDto(song)
 
     return songDto
   }
 
-  async update(songId, name, body, folderId) {
-    const song = await Song.findByIdAndUpdate(songId, { name, body, folder: folderId })
+  async update(songId, name, body, description, folderId) {
+    const song = await Song.findByIdAndUpdate(songId, {
+      name,
+      body,
+      description,
+      folderId,
+    })
 
     const songDto = new SongDto(song)
 
     return songDto
   }
 
-  async getSongs(userId, folderId) {
+  async getSongs(userId, folderId, term) {
     let songs = []
-    if (folderId) {
-      songs = await Song.find({ owner: userId, folder: folderId })
-    } else {
-      songs = await Song.find({ owner: userId })
+
+    if (!folderId && !term) {
+      songs = await Song.find({ userId })
+    }
+    if (!folderId && term) {
+      songs = await Song.find({
+        userId,
+        name: { $regex: term, $options: 'i' },
+      })
+    }
+    if (folderId && !term) {
+      songs = await Song.find({ userId, folderId })
+    }
+    if (folderId && term) {
+      songs = await Song.find({
+        userId,
+        folderId,
+        name: { $regex: term, $options: 'i' },
+      })
     }
 
     const songsDto = songs.map((song) => new SongsDto(song))
@@ -40,9 +64,7 @@ class SongsService {
 
   async getOneSong(songId) {
     const song = await Song.findById(songId)
-
     const songDto = new SongDto(song)
-
     return songDto
   }
 

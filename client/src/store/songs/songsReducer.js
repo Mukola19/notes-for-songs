@@ -18,11 +18,18 @@ const songsReducer = createSlice({
     setSong: (state, { payload }) => {
       state.song = payload
     },
+    clearOneSong: state => {
+      state.song = {}
+    },
+
+    clearSongs: state => {
+      state.array = []
+    }
   },
 })
 
 const { actions, reducer } = songsReducer
 
-export const { setSongs, setSong } = actions
+export const { setSongs, setSong ,clearOneSong, clearSongs} = actions
 
 export default reducer

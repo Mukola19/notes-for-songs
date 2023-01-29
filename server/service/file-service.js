@@ -1,20 +1,25 @@
-const {  v4 } = require("uuid")
-const path = require("path")
-// const ApiError = require('../error/ApiError')
+const { v4 } = require('uuid')
+const path = require('path')
+// const fs = require('fs')
+const { unlink } = require('fs')
+const ApiError = require('../ApiError/ApiError')
 
 class FileService {
-  async add(img) {
-    if (!img) {
-      return ""
-    }
-
-    const name = v4 + ".jpg"
-    img.mv(path.join(__dirname, "..", "static", name))
-
+  add(photo) {
+    if (!photo) return ''
+    const name = v4() + '.jpg'
+    photo.mv(path.join(__dirname, '..', 'static', name))
     return name
   }
 
-  async delete() {}
+  delete(photoName) {
+    unlink(path.join(__dirname, '..', 'static', photoName), error => {
+      if(error) {
+        throw ApiError.internal()
+
+      }
+    })
+  }
 }
 
 module.exports = new FileService()

@@ -16,22 +16,14 @@ export const SongwritingPage = () => {
   const { songId } = useParams()
 
   const saveing = (data) => {
-    songId
-      ? dispatch(updateSong({ songId, ...data }, push))
-      : dispatch(createSong(data, push))
-
-      
+    console.log(data);
+    // songId
+    //   ? dispatch(updateSong({ songId, ...data }, push))
+    //   : dispatch(createSong(data, push))
   }
 
-  return (
-    <>
-      <Songwriting
+  return <Songwriting
         song={songId ? song : null}
         saveing={saveing}
       />
-
-   
-
-      </>
-  )
 }

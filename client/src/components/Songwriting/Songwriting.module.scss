@@ -4,6 +4,7 @@
   position: relative;
   margin: 0px auto;
   min-height: 450px;
+  width: 700px;
 }
 .form {
   padding: 15px 0px 15px 15px;
@@ -67,5 +68,37 @@
   & p{
     width: 100px;
   }
+
+}
+
+
+
+.buttonFolderSelect {
+  display:flex;
+  align-items:center;
+  cursor:pointer;
+  & span {
+    margin-left:4px;
+  }
+}
+
+
+.propertiesSongs {
+  height: 40px;
+  width: 700px;
+  margin-bottom: 20px;
+
+}
+
+
+.wrapper {
+
+}
+
+.editor {
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  min-height: 450px;
 
 }
